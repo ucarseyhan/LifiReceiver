@@ -4,10 +4,21 @@ import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.util.Timer;
+
 import model.ExitPacket;
 import model.HelloPacket;
+import model.LifiCTLStatistics;
 import model.Packet;
-
+/*****************************************************************************
+ * LifiReceiver is the code that receiver connected PC should run.
+ * The Desktop Unit (DU) is waiting data from Ceiling Unit via specified
+ * port number. When the data is received then necessary actions are taken such
+ * as decoding the packet and writing the data to 
+ * 
+ * @author seyhan
+ *
+ *******************************************************************************/
 public class LifiReceiver 
 {
 	private int portNumber = 5004;
@@ -44,6 +55,12 @@ public class LifiReceiver
 		{
 			DatagramSocket socket = new DatagramSocket(portNumber);
 			//System.out.println("Server is starting on port number:"+portNumber);
+			
+			//Create the Lifi Receiver statistics
+			LifiCTLStatistics lifiCTLStatistics = new LifiCTLStatistics();
+			Timer timer = new Timer(true);
+			//task,delay,interval
+			timer.scheduleAtFixedRate(lifiCTLStatistics, 100, 2 * 1000);
 			while(true)
 			{
 				
@@ -57,6 +74,9 @@ public class LifiReceiver
 				if(packet instanceof ExitPacket) break;
 			}
 			System.out.println("Shut Down Server");
+			//Cancel the timer
+			timer.cancel();
+			//Close the socket.
 			socket.close();
 		} 
 		catch (Exception e) 
@@ -65,6 +85,15 @@ public class LifiReceiver
 		}
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////
+	/************************************************************
+	 * decodePacket is used for decoding packet content and getting 
+	 * the packet informations such that;
+	 * -packet sequence number
+	 * -packet transmit time
+	 * packet receive time
+	 * 
+	 * @param packet
+	 ************************************************************/
 	private void decodePacket(Packet packet)
 	{
 		try 
@@ -76,7 +105,8 @@ public class LifiReceiver
 				{
 					HelloPacket helloPacket = (HelloPacket)packet;
 					helloPacket.setReceiveTime(System.currentTimeMillis());
-					System.out.println(helloPacket.getSequenceNumber()+" "+helloPacket.getTransmitTime()+" "+helloPacket.getReceiveTime());
+					System.out.println(helloPacket.getSequenceNumber()+" "
+					+helloPacket.getTransmitTime()+" "+helloPacket.getReceiveTime());
 				}
 			}
 		} 
@@ -85,6 +115,7 @@ public class LifiReceiver
 			e.printStackTrace();
 		}
 	}
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
 	

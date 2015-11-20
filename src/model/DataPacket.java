@@ -1,5 +1,10 @@
 package model;
-
+/**
+ * Specialized Data Packet
+ * 
+ * @author seyhan
+ *
+ */
 public class DataPacket extends Packet  
 {
 
@@ -11,7 +16,15 @@ public class DataPacket extends Packet
 	{
 		
 	}
-
+	/******************************************************
+	 * Specialized Data Packet
+	 * 
+	 * @param transmitTime
+	 * @param receiveTime
+	 * @param sequenceNumber
+	 * @param packetType
+	 * @param content
+	 *******************************************************/
 	public DataPacket(long transmitTime, long receiveTime, 
 			int sequenceNumber, int packetType, String content) 
 	{

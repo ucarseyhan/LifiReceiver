@@ -23,11 +23,7 @@ public class Analyzer
 		try 
 		{
 			File file = new File(fileLocation);
-
-
-
 			Scanner sc = new Scanner(file);
-
 			while (sc.hasNextLine()) 
 			{
 				String line = sc.nextLine();

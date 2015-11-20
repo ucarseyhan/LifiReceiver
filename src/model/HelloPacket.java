@@ -1,10 +1,12 @@
 package model;
-
+/**
+ * System Hello Packet
+ * 
+ * @author seyhan
+ *
+ */
 public class HelloPacket extends Packet 
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	/**

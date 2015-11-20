@@ -1,7 +1,12 @@
 package model;
 
 import java.io.Serializable;
-
+/**
+ * System Packet structure
+ * 
+ * @author seyhan
+ *
+ */
 public class Packet implements Serializable,Transmittable 
 {
 
@@ -16,7 +21,14 @@ public class Packet implements Serializable,Transmittable
 	public Packet() 
 	{
 	}
-
+	/**
+	 * Specialized Packet 
+	 * 
+	 * @param transmitTime
+	 * @param receiveTime
+	 * @param sequenceNumber
+	 * @param packetType
+	 */
 	public Packet(long transmitTime, long receiveTime, int sequenceNumber, int packetType) 
 	{
 		super();
