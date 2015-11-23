@@ -59,6 +59,7 @@ public class LifiReceiver
 			//Create the Lifi Receiver statistics
 			LifiCTLStatistics lifiCTLStatistics = new LifiCTLStatistics();
 			Timer timer = new Timer(true);
+			//Start the timer
 			//task,delay,interval
 			timer.scheduleAtFixedRate(lifiCTLStatistics, 100, 2 * 1000);
 			while(true)
