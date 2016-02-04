@@ -9,6 +9,7 @@ import java.util.Timer;
 import model.ExitPacket;
 import model.HelloPacket;
 import model.LifiCTLStatistics;
+import model.NTPDate;
 import model.Packet;
 /*****************************************************************************
  * LifiReceiver is the code that receiver connected PC should run.
@@ -105,7 +106,16 @@ public class LifiReceiver
 				if(packet instanceof HelloPacket)
 				{
 					HelloPacket helloPacket = (HelloPacket)packet;
-					helloPacket.setReceiveTime(System.currentTimeMillis());
+					
+					/////////////////////////////////////////////////////////////////////////
+					//Get center PC date
+					//Disable on CENTER PC !!! IMPORTANT
+					long centerPCDate = new NTPDate().getNTPDate();
+					helloPacket.setReceiveTime(centerPCDate);
+					/////////////////////////////////////////////////////////////////////////
+					
+					
+					//helloPacket.setReceiveTime(System.currentTimeMillis());
 					System.out.println(helloPacket.getSequenceNumber()+" "
 					+helloPacket.getTransmitTime()+" "+helloPacket.getReceiveTime());
 				}

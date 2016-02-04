@@ -1,5 +1,7 @@
 package lifiReceiver;
 
+import analyzer.Analyzer;
+
 public class TestLifi 
 {
 
@@ -7,13 +9,13 @@ public class TestLifi
 	{
 		try 
 		{
-			//Start lifi receiver on default port number
-			LifiReceiver lifiReceiver = new LifiReceiver();
-			lifiReceiver.start();
+//			//Start lifi receiver on default port number
+//			LifiReceiver lifiReceiver = new LifiReceiver();
+//			lifiReceiver.start();
 			
-//			Analyzer analyzer = new Analyzer();
-//			analyzer.readFile();
-//			analyzer.analyze();
+			Analyzer analyzer = new Analyzer();
+			analyzer.readFile();
+			analyzer.analyze();
 		}
 		catch (Exception e) 
 		{
